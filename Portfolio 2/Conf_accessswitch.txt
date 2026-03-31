@@ -1,0 +1,87 @@
+Configuration de l'Access Switch :
+
+Paramètres généraux :
+
+# Spanning-tree
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+
+# SSH
+hostname FLO-SW-ACC-01
+ip domain-name lab.local
+crypto key generate rsa modulus 2048
+
+username admin secret cisco
+
+line vty 0 4
+login local
+transport input ssh
+
+no ip domain-lookup #éviter blocage si erreur de commande
+service password-encryption #chiffrer les mdp
+
+# Création des vlans
+vlan 10
+name users
+vlan 20
+name wifi
+vlan 30
+name servers
+vlan 40
+name mngmt
+
+# Uplink vers Coreswitch
+int range g2/0/47-48
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40
+spanning-tree portfast trunk
+no sh
+
+# Ports vlan 10
+int range g2/0/1-12
+switchport mode access
+switchport access vlan 10
+spanning-tree portfast
+no sh
+
+# Ports vlan 20
+int range g2/0/21-24
+switchport mode access
+switchport access vlan 20
+spanning-tree portfast
+no sh
+
+# Ports vlan 30
+int range g2/0/25-26
+switchport mode access
+switchport access vlan 30
+spanning-tree portfast
+no sh
+
+# Ports vlan 40
+int range g2/0/37-38
+switchport mode access
+switchport access vlan 40
+no sh
+int vlan 40
+ip addr 172.17.4.2 255.255.255.248
+no sh
+
+ip default-gateway 172.17.5.2
+
+# Sécurité
+int range g0/25-48
+sh
+
+int range g0/2-20
+switchport port-security
+switchport port-security maximum 2
+switchport port-security violation restrict
+
+
+# Pour wipe switch
+write erase
+delete flash:vlan.dat
+reload
+no
