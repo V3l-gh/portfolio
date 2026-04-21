@@ -451,6 +451,62 @@ h2 {
   color: var(--link-hover);
 }
 
+.mission-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.mission-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mission-summary::-webkit-details-marker {
+  display: none;
+}
+
+.mission-card[open] .mission-summary i {
+  transform: rotate(180deg);
+}
+
+.mission-summary i {
+  transition: transform 0.2s ease;
+}
+
+.mission-intro,
+.mission-doc-list {
+  padding: 0 1.15rem 1rem;
+}
+
+.mission-card > .hero-cta {
+  padding: 0 1.15rem 1rem;
+}
+
+.mission-intro {
+  color: var(--muted);
+  margin: 0;
+}
+
+.mission-doc-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.mission-doc-item {
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.mission-doc-item h3 {
+  margin-bottom: 0.65rem;
+}
+
 .stage-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
