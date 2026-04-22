@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" fill="none">
-  <rect width="900" height="620" rx="24" fill="#E9F0FA"/>
-  <rect x="120" y="92" width="660" height="436" rx="20" fill="#FFFFFF"/>
-  <circle cx="450" cy="220" r="82" fill="#C4D9F3"/>
-  <rect x="286" y="324" width="328" height="28" rx="14" fill="#C4D9F3"/>
-  <rect x="240" y="372" width="420" height="22" rx="11" fill="#D6E4F6"/>
-  <rect x="268" y="410" width="364" height="22" rx="11" fill="#D6E4F6"/>
-  <text x="450" y="552" text-anchor="middle" fill="#3A5F8C" font-size="30" font-family="Inter, Arial, sans-serif">Profil BTS SIO SISR</text>
-</svg>
