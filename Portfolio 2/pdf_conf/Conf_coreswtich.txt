@@ -1,0 +1,127 @@
+Configuration Coreswitch :
+
+hostname FLO-SW-CORE-01
+no ip domain-lookup
+service password-encryption
+
+# SSH
+ip domain-name lab.local
+crypto key generate rsa modulus 2048
+username admin secret cisco
+ip ssh version 2
+access-list 10 permit 172.17.4.0 0.0.0.7
+line vty 0 4
+access-class 10 in
+login local
+transport input ssh
+
+# Spanning-tree
+spanning-tree mode rapid-pvst
+spanning-tree portfast default
+spanning-tree bpduguard default
+spanning-tree portfast bpduguard
+
+# Création des vlans
+vlan 10
+name users
+vlan 20
+name wifi
+vlan 30
+name servers
+vlan 40
+name mngmt
+vlan 50
+name inter
+
+# Conf des int VLAN
+int vlan 10
+ip addr 172.17.1.254 255.255.255.0
+ip helper-address 172.17.3.1
+no sh
+ 
+int vlan 20
+ip addr 172.17.2.254 255.255.255.0
+ip helper-address 172.17.3.1
+no sh
+ 
+int vlan 30
+ip addr 172.17.3.6 255.255.255.248
+ip helper-address 172.17.3.1
+no sh
+ 
+int vlan 40
+ip addr 172.17.4.6 255.255.255.248
+ip helper-address 172.17.3.1
+no sh
+ 
+int vlan 50
+ip addr 172.17.5.2 255.255.255.252
+ip helper-address 172.17.3.1
+no sh
+
+
+# Port-channel
+int range g2/0/47-48
+   channel-group 1 mode active
+   no sh
+   exit
+int port-channel 1
+   switchport mode access
+   switchport access vlan 50
+   description connexion inter
+   no sh
+   exit
+
+int range g2/0/45-46
+   channel-group 2 mode active
+   no sh
+   exit
+int port-channel 2
+   switchport mode trunk
+   switchport trunk allowed vlan 10,20,30,40,50
+   description connexion switch
+   no sh
+   exit
+
+ 
+# Activer routage IP
+ip routing
+
+
+# Pour wipe switch
+write erase
+delete flash:vlan.dat
+reload
+no
+
+
+
+# Conf OSPF
+router ospf 1
+router-id 172.17.5.2
+
+network 172.17.0.0 0.0.0.255 area 0
+network 172.17.0.0 0.0.0.255 area 0
+network 172.17.0.0 0.0.0.7 area 0
+network 172.17.0.0 0.0.0.7 area 0
+network 172.17.0.0 0.0.0.3 area 0
+
+
+# Sécu OSPF
+int vlan 50
+ip ospf authentication message-digest
+ip ospf message-digest-key 1 md5 admin01
+
+
+# Ports vers Access Switch
+int Te2/1/4
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40
+
+Le core switch fonctionne en layer 3, il assure le routage inter-VLAN via des interfaces SVI et échange dynamiquement les routes avec le firewall 
+grâce à OSPF sécurisé.
+
+L’area 0 est le backbone OSPF. Elle est obligatoire et centralise l’échange des routes entre toutes les autres zones. Dans notre infrastructure, 
+l’ensemble des équipements participe à l’area 0 afin de simplifier l’architecture et garantir la stabilité du routage.
+
+Pour connexion avec third partie (prestataire externe) utilisation tunnel (virtuel ou pas) qui crypte données (ipsec)

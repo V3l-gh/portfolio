@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio professionnel d'un étudiant en BTS SIO option SISR : compétences systèmes et réseaux, projets, stage et contact."
+    />
+    <title>Portfolio BTS SIO SISR | Administrateur Systèmes & Réseaux</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav-wrapper">
+        <a href="#top" class="brand">Portfolio SISR</a>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Activer le mode sombre">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="side-nav" aria-label="Raccourcis des sections">
+      <a href="#accueil">Accueil</a>
+      <a href="#competences">Compétences</a>
+      <a href="#projets">Projets</a>
+      <a href="#experience">Expérience</a>
+      <a href="#formations">Parcours scolaire</a>
+      <a href="#veille">Veille techno</a>
+      <a href="#epreuve-e5">Épreuve E5</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+      <section class="hero section" id="accueil">
+        <div class="container hero-grid">
+          <div>
+            <p class="badge">Étudiant en 2ᵉ année de BTS SIO - Option SISR</p>
+            <h1>Administrateur Systèmes & Réseaux en devenir</h1>
+            <p class="lead">
+              Passionné par l'infrastructure IT, la cybersécurité et l'automatisation,
+              je conçois et maintiens des environnements réseaux fiables, sécurisés et performants.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#projets">Voir mes projets</a>
+              <a class="btn btn-secondary" href="assets/CV L3 info.pdf" download>Télécharger mon CV</a>
+            </div>
+          </div>
+          <aside class="profile-card">
+            <img src="assets/images/profile.svg" alt="Portrait professionnel" />
+            <h2>Profil</h2>
+            <ul>
+              <li>Administration Linux & Windows Server</li>
+              <li>Réseaux LAN / VLAN / Routage</li>
+              <li>Virtualisation (VMware / Proxmox)</li>
+              <li>Scripting Bash & Python</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="competences">
+        <div class="container">
+          <h2>Compétences techniques</h2>
+          <p class="section-intro">Compétences appliquées en contexte scolaire, de stages et projets personnels.</p>
+          <div class="skills-grid">
+            <article class="skill-card">
+              <i class="fa-solid fa-network-wired"></i>
+              <h3>Réseaux</h3>
+              <p>Adressage IP, VLAN, DHCP, DNS, routage inter-VLAN, supervision réseau.</p>
+            </article>
+            <article class="skill-card">
+              <i class="fa-brands fa-linux"></i>
+              <h3>Serveurs Linux</h3>
+              <p>Déploiement de services web, SSH, sauvegardes, droits utilisateurs, maintenance.</p>
+            </article>
+            <article class="skill-card">
+              <i class="fa-brands fa-windows"></i>
+              <h3>Windows Server</h3>
+              <p>Active Directory, GPO, partages sécurisés, gestion des comptes et des accès.</p>
+            </article>
+            <article class="skill-card">
+              <i class="fa-solid fa-server"></i>
+              <h3>Virtualisation</h3>
+              <p>Création d'environnements de test virtualisés, snapshots, isolation des services.</p>
+            </article>
+            <article class="skill-card">
+              <i class="fa-solid fa-shield-halved"></i>
+              <h3>Sécurité</h3>
+              <p>Durcissement de systèmes, règles de pare-feu, segmentation réseau et bonnes pratiques.</p>
+            </article>
+            <article class="skill-card">
+              <i class="fa-solid fa-terminal"></i>
+              <h3>Scripting</h3>
+              <p>Automatisation de tâches d'administration en Bash et Python.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="projets">
+        <div class="container">
+          <h2>Projets réalisés</h2>
+          <p class="section-intro">Sélection de projets scolaires et personnels orientés systèmes et réseaux.</p>
+          <div class="projects-grid">
+            <a class="project-card" href="projet-ap.html">
+              <img src="assets/images/architecture_ap.webp" alt="Capture d'écran projet serveur" />
+              <div class="project-content">
+                <h3>Atelier de Professionnalisation (AP)</h3>
+                <p>Livrables techniques par mission : configuration reseau, pfSense et stockage TrueNAS.</p>
+                <span class="btn btn-text">Voir le projet</span>
+              </div>
+            </a>
+
+            <a class="project-card" href="asterisk.html">
+              <img src="assets/images/téléphone_maison.png" alt="Image téléphone" />
+              <div class="project-content">
+                <h3>Projet Asterisk</h3>
+                <p>Mise en place d'un serveur de telephonie IP et documentation de configuration.</p>
+                <span class="btn btn-text">Voir le projet</span>
+              </div>
+            </a>
+
+            <a class="project-card" href="projet-infrastructure-reseau.html">
+              <img src="assets/images/ubisoft.png" alt="Schéma infrastructure réseau" />
+              <div class="project-content">
+                <h3>2nd Stage Ubisoft</h3>
+                <p>Procedures de configuration reseau : access/core switch, firewall et serveur DHCP.</p>
+                <span class="btn btn-text">Voir le projet</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="container">
+          <h2>Expériences / Stage</h2>
+          <div class="timeline">
+            <a class="timeline-link" href="experience-stage.html" aria-label="Voir le détail du stage">
+              <article class="timeline-item">
+              <span class="timeline-date">01-2026 - 02-2026</span>
+              <h3>Stage - Technicien Systèmes & Réseaux</h3>
+              <p class="timeline-place">Ubisoft (6 semaines)</p>
+              <ul>
+                <li>Création d'une infrastructure réseau interne</li>
+                <li>Configuration de serveurs et services réseau (switch, routeur, firewall)</li>
+                <li>Vérification de la sécurité de l'infrastructure</li>
+                <li>Rédaction de procédures techniques internes</li>
+              </ul>
+              </article>
+            </a>
+
+            <a class="timeline-link" href="experience-stage-2025.html" aria-label="Voir le détail du stage 2025">
+              <article class="timeline-item">
+              <span class="timeline-date">05-2025 - 07-2025</span>
+              <h3>Stage - Découverte des métiers IT</h3>
+              <p class="timeline-place">Ubisoft (6 semaines)</p>
+              <ul>
+                <li>Support utilisateurs et déploiement matériel (Local IT / Kiosque)</li>
+                <li>Configuration réseau et scripting Python (équipe réseau WAN)</li>
+                <li>Découverte du Data Center (architecture, redondance, opérations serveurs)</li>
+              </ul>
+              </article>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="formations">
+        <div class="container">
+          <h2>Parcours scolaire</h2>
+          <div class="edu-grid edu-grid-single">
+            <article class="edu-card">
+              <h3>BTS SIO - Option SISR</h3>
+              <p>Lycée CARRIAT - 2024 à 2026</p>
+              <p>Spécialisation en solutions d'infrastructures, systèmes et réseaux.</p>
+            </article>
+            <article class="edu-card">
+              <h3>Baccalauréat général</h3>
+              <p>Lycée Saint Aspais - 2021 à 2024</p>
+              <p>
+                Parcours général avec les spécialités NSI et Mathématiques,
+                avec Physique en classe de première.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="veille">
+        <div class="container">
+          <h2>Veille technologique</h2>
+          <p class="section-intro">
+            Suivi de l'IA embarquée dans les objets du quotidien, notamment les écouteurs sans fil
+            et les lunettes connectées.
+          </p>
+          <a class="project-card" href="veille-techno.html">
+            <div class="project-content">
+              <h3>IA dans les écouteurs et les lunettes connectées</h3>
+              <p>
+                Traduction automatique en temps réel, assistants vocaux contextuels,
+                reconnaissance de l'environnement et enjeux de déploiement selon les régions.
+              </p>
+              <span class="btn btn-text">Voir la veille complète</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section section-alt" id="epreuve-e5">
+        <div class="container">
+          <h2>Épreuve E5</h2>
+          <p class="section-intro">
+            Tableau de synthèse des situations professionnelles et compétences mobilisées
+            dans le cadre de l'épreuve E5 du BTS SIO option SISR.
+          </p>
+          <a class="project-card" href="epreuve-e5.html">
+            <div class="project-content">
+              <h3>Tableau de synthèse – Valentin Trillaud</h3>
+              <p>
+                Récapitulatif des situations professionnelles réalisées en contexte scolaire
+                et en stage, associées aux compétences des blocs 1, 2 et 3 du référentiel.
+              </p>
+              <span class="btn btn-text">Voir le tableau complet</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-grid">
+          <div>
+            <h2>Contact</h2>
+            <p class="section-intro">Disponible pour stage, alternance et collaboration sur des projets IT.</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/valentin-trillaud-b3a5a8351" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+              </a>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm" action="https://formspree.io/f/mnjgjlzz" method="POST">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <p id="formFeedback" class="form-feedback" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© 2026 - Portfolio BTS SIO SISR</p>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="#" id="legalLink">Mentions légales</a>
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="legalModal" class="modal">
+      <article class="modal-content legal-content">
+        <button class="modal-close" id="closeLegalModal" aria-label="Fermer">×</button>
+        <h3>Mentions légales</h3>
+        <p>Ce site est un portfolio étudiant à but non commercial.</p>
+        <p>Responsable de publication : Étudiant BTS SIO SISR.</p>
+        <p>Vous pouvez adapter ce texte avec vos informations personnelles avant publication.</p>
+      </article>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>

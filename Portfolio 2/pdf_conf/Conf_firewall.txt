@@ -1,0 +1,218 @@
+Déploiement Firewall
+
+
+Installation Rocky Linux 9 :
+	- https://docs.rockylinux.org/8/fr/guides/8_6_installation/?utm_source=chatgpt.com
+	- https://tutobox.fr/tuto-installation-rocky-linux-9?utm_source=chatgpt.com
+
+
+Installation du pare-feu :
+	- https://devtutorial.io/how-to-install-firewalld-on-rocky-linux-9-p3382.html?utm_source=chatgpt.com
+
+
+Règles firewall :
+
+# Règles permanentes même après redémarrage
+sudo firewall-cmd --permanent --reload 
+
+# Créer une règle
+sudo firewall-cmd --permanent --new-zone=users 
+sudo firewall-cmd --permanent --new-zone=wifi
+sudo firewall-cmd --permanent --new-zone=servers
+sudo firewall-cmd --permanent --new-zone=mngmt
+sudo firewall-cmd --permanent --new-zone=inter
+
+# Associer sous-réseaux
+sudo firewall-cmd --permanent --zone=users --add-source=172.17.1.0/24 
+sudo firewall-cmd --permanent --zone=wifi --add-source=172.17.2.0/24
+sudo firewall-cmd --permanent --zone=servers --add-source=172.17.3.0/29
+sudo firewall-cmd --permanent --zone=mngmt --add-source=172.17.4.0/29
+sudo firewall-cmd --permanent --zone=inter --add-source=172.17.5.0/30
+
+sudo firewall-cmd --reload #recharger la conf
+
+sudo firewall-cmd --list-all-zones #lister les règles
+
+
+- Règles VLAN 10 (users) :
+
+sudo firewall-cmd --permanent --zone=users --add-service=http #autoriser trafic Internet
+sudo firewall-cmd --permanent --zone=users --add-service=https
+sudo firewall-cmd --permanent --zone=users --add-service=dns
+sudo firewall-cmd --permanent --zone=users --add-service=dhcp
+
+sudo firewall-cmd --permanent --zone=users --add-icmp-block-inversion=no #autoriser ping
+
+- Règles VLAN 20 (wifi) :
+
+sudo firewall-cmd --permanent --zone=wifi --add-service=http #autoriser trafic Internet
+sudo firewall-cmd --permanent --zone=wifi --add-service=https
+sudo firewall-cmd --permanent --zone=wifi --add-service=dns
+sudo firewall-cmd --permanent --zone=wifi --add-service=dhcp
+
+-Règles VLAN 30 (servers) :
+
+sudo firewall-cmd --permanent --zone=servers --add-service=dns #autorise requête dns
+sudo firewall-cmd --permanent --zone=servers --add-service=ssh
+
+- Règles VLAN 40 (mngmt) :
+
+sudo firewall-cmd --permanent --zone=mngmt --add-service=ssh #pour activer le service ssh (Linux)
+sudo firewall-cmd --permanent --zone=mngmt --add-service=rdp #pour activer le service rdp (Windows)
+
+sudo firewall-cmd --permanent --zone=mngmt --add-source=172.17.5.0/30 #restreint l'accès au réseau d'interconnexion pour + de sécurité
+
+- Règles VLAN 50 (inter) :
+
+sudo firewall-cmd --permanent --zone=inter --add-port=89/udp #autorise OSPF (port=89/udp utilisé pour la comm entre voisins (OSPF Authenticator))
+sudo firewall-cmd --permanent --zone=inter --add-source=172.17.5.0/30
+
+
+Configuration du routage entre Firewall  et Coreswitch :
+
+FRR (FRRouting) :
+
+# Activer EPEL
+sudo dnf install epel-release -y
+
+# Installer FRR avec tous les protocoles
+sudo dnf install frr frr-snmp frr-pythontools -y
+
+# Activer FRR au démarrage
+sudo systemctl enable frr
+sudo systemctl start frr
+sudo systemctl status frr
+
+sudo nano /etc/frr/daemons
+
+#Regarder si
+ospfd=yes
+
+sudo systemctl restart frr
+
+#Entrer dans le shell FRR
+sudo vtysh
+
+# entrer en mode configuration
+configure terminal
+
+# définir le router OSPF (coreswitch) et son ID
+router ospf
+  router-id 172.17.5.2
+
+# annoncer le réseau de l’interconnexion vers OSPF
+  network 172.17.5.0/30 area 0
+
+# sortir de la configuration OSPF
+exit
+
+# sauvegarder la config
+write
+
+# vérifier les voisins OSPF
+show ip ospf neighbor
+
+# vérifier la table de routage OSPF
+show ip route ospf
+
+
+nftables :
+
+nano /etc/nftables.conf
+
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+        chain forward {
+                type filter hook forward priority 0;
+                policy drop;
+
+                ct state established,related accept
+
+                ip saddr 172.17.1.0/24 jump users
+                ip saddr 172.17.2.0/24 jump wifi
+                ip saddr 172.17.3.0/29 jump servers
+                ip saddr 172.17.4.0/29 jump mngmt
+                ip saddr 172.17.5.0/30 jump inter
+
+                drop
+        }
+
+        chain users {
+                # accès web
+                tcp dport { 80, 443 } accept
+
+                # DNS
+                udp dport 53 accept
+                tcp dport 53 accept
+
+                # ping
+                ip protocol icmp accept
+
+		# Speedtest
+                tcp dport { 5201, 5060, 8080 } accept
+                udp dport { 5060, 8080 } accept
+
+                return
+        }
+
+        chain wifi {
+                # services internes
+                tcp dport { 22, 80, 443, 3306 } accept
+                return
+        }
+
+        chain servers {
+                ct state established,related accept
+
+                # DNS
+                udp dport 53 accept
+                tcp dport 53 accept
+
+                # HTTP/HTTPS
+                tcp dport { 80, 443 } accept
+
+                # NTP
+                udp dport 123 accept
+
+                # ping
+                ip protocol icmp accept
+
+                drop
+        }
+
+	chain mngmt {
+                # SSH
+                tcp dport 22 accept
+
+                ip protocol icmp accept
+
+                drop
+        }
+
+        chain inter {
+                accept
+                return
+        }
+}
+
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority 100;
+
+        # NAT vers Internet
+        ip saddr 172.17.0.0/16 oifname "eno1" masquerade
+    }
+}
+
+
+nft -f /etc/nftables.conf
+
+Moyen plus restrictif d'accepter les ping :
+ ip protocol icmp icmp type echo-request accept
+ ip protocol icmp icmp type echo-reply accept
+
+
+Pour se co sur le Firewall, soit via 'ILO' (tout à droite) pour avoir son interface web, soit brancher écran, clavier et souris au serveur. Ou SSH

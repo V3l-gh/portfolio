@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rapport de stage Ubisoft 2026 : infrastructure réseau, journal de bord, difficultés et compétences développées." />
+    <title>Rapport de stage | Ubisoft 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" id="top">
+      <div class="container nav-wrapper">
+        <a href="index.html#top" class="brand">Portfolio SISR</a>
+        <a class="btn btn-secondary header-back-link" href="index.html#experience">
+          <i class="fa-solid fa-arrow-left"></i>&nbsp;Retour
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section section-alt">
+        <div class="container">
+          <header class="stage-header">
+            <p class="badge">Rapport de stage 2026</p>
+            <h1>Stage Technicien Systèmes & Réseaux - Ubisoft</h1>
+            <p class="section-intro">
+              Stage réalisé de janvier à février 2026 autour d'un projet de mise en place d'une
+              infrastructure réseau complète : Firewall, Core Switch, Access Switch, serveur DHCP/DNS
+              et machine utilisateur de test.
+            </p>
+          </header>
+
+          <section class="stage-grid stage-grid-2">
+            <article class="edu-card stage-card">
+              <h2>Présentation de l'entreprise</h2>
+              <p>
+                Ubisoft est une entreprise de création de jeux vidéo, dont le siège social est situé à
+                Saint-Mandé (94000). Son capital est de 575 millions d'euros et elle compte environ
+                14 000 salariés.
+              </p>
+              <p>
+                Le groupe est implanté dans de nombreux pays (France, Espagne, Italie, Bulgarie,
+                Roumanie, Ukraine, Canada, États-Unis, Chine, Brésil, Japon, Australie) et est connu
+                notamment pour Assassin's Creed, Rayman, Far Cry et Tom Clancy's.
+              </p>
+            </article>
+
+            <article class="edu-card stage-card">
+              <h2>Objectif principal du stage</h2>
+              <p>
+                Concevoir, déployer et valider une infrastructure réseau d'entreprise simulée, avec une
+                approche orientée production : adressage, VLAN, routage, sécurité, supervision,
+                documentation et tests de performance.
+              </p>
+              <ul>
+                <li>Firewall Linux avec règles nftables par zone</li>
+                <li>Core Switch L3 (VLAN, inter-VLAN, ports-channel, OSPF)</li>
+                <li>Access Switch sécurisé (STP, BPDU Guard, port-security)</li>
+                <li>Serveur Docker pour DHCP/DNS via Dnsmasq</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="stage-section">
+            <h2>Éléments visuels du projet</h2>
+            <div class="stage-gallery">
+              <figure class="project-card stage-media-card">
+                <img src="assets/images/ubisoft.png" alt="Logo Ubisoft" />
+                <figcaption>Contexte entreprise</figcaption>
+              </figure>
+              <figure class="project-card stage-media-card">
+                <img src="assets/images/diagramme_layer2.png" alt="Diagramme réseau layer 2" />
+                <figcaption>Diagramme Layer 2</figcaption>
+              </figure>
+              <figure class="project-card stage-media-card">
+                <img src="assets/images/diagramme_layer3.png" alt="Diagramme réseau layer 3" />
+                <figcaption>Diagramme Layer 3</figcaption>
+              </figure>
+              <figure class="project-card stage-media-card">
+                <img src="assets/images/câblage.jpg" alt="Photo du câblage de l'infrastructure" />
+                <figcaption>Mise en place du câblage</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="stage-section">
+            <h2>Journal de bord (synthèse)</h2>
+            <div class="timeline">
+              <article class="timeline-item">
+                <span class="timeline-date">Semaine 1</span>
+                <h3>Cadrage et préparation</h3>
+                <ul>
+                  <li>Prise de connaissance du projet et des contraintes techniques</li>
+                  <li>Rédaction des premières procédures d'installation des équipements</li>
+                  <li>Conception des diagrammes réseau Layer 2 / Layer 3 et plan d'adressage</li>
+                </ul>
+              </article>
+
+              <article class="timeline-item">
+                <span class="timeline-date">Semaines 2 et 3</span>
+                <h3>Résolution d'incidents matériels et configuration Firewall</h3>
+                <ul>
+                  <li>Diagnostic serveur (IP iLO incorrecte, problème RAID, installation Rocky Linux)</li>
+                  <li>Configuration du firewall Linux et des chaînes nftables par sous-réseau</li>
+                  <li>Mise en place d'un niveau de filtrage adapté selon les VLAN (mngmt, users, etc.)</li>
+                </ul>
+              </article>
+
+              <article class="timeline-item">
+                <span class="timeline-date">Semaine 4</span>
+                <h3>Déploiement Core / Access Switch</h3>
+                <ul>
+                  <li>Configuration des VLAN, ports-channel et routage inter-VLAN sur le Core Switch</li>
+                  <li>Sécurisation OSPF sur le VLAN management</li>
+                  <li>Configuration Access Switch et sécurisation STP / BPDU Guard</li>
+                </ul>
+              </article>
+
+              <article class="timeline-item">
+                <span class="timeline-date">Semaine 5</span>
+                <h3>Mise en service, services réseau et performance</h3>
+                <ul>
+                  <li>Déploiement du serveur DHCP/DNS sous Docker avec Dnsmasq</li>
+                  <li>Validation des tests réseau (Internet, inter-sous-réseaux, qualité de service)</li>
+                  <li>Mesures via iperf/speedtest et correction d'un bridage de lien à 100 Mbps</li>
+                </ul>
+              </article>
+
+              <article class="timeline-item">
+                <span class="timeline-date">Semaine 6</span>
+                <h3>Automatisation et clôture</h3>
+                <ul>
+                  <li>Développement d'un script Python (Netmiko) pour configurer des ports Cisco</li>
+                  <li>Ajout de règles de sécurité : bpduguard, storm-control, nonegotiate, port-security</li>
+                  <li>Finalisation de la documentation et dérackage des équipements</li>
+                </ul>
+              </article>
+            </div>
+          </section>
+
+          <section class="stage-grid stage-grid-2 stage-section">
+            <article class="edu-card stage-card">
+              <h2>Difficultés rencontrées</h2>
+              <ul>
+                <li>Échec d'installation initiale dû à une configuration RAID incorrecte</li>
+                <li>Accès serveur complexe (adresse iLO erronée au départ)</li>
+                <li>Problèmes de disponibilité matériel et contraintes d'accès à certaines zones</li>
+                <li>Anomalie DNS temporaire et pertes d'accès ponctuelles au serveur DHCP</li>
+              </ul>
+            </article>
+
+            <article class="edu-card stage-card">
+              <h2>Compétences développées</h2>
+              <ul>
+                <li>Architecture réseau complète et segmentation VLAN</li>
+                <li>Sécurisation des flux (nftables, OSPF, STP, port-security)</li>
+                <li>Administration Linux, Docker et services DHCP/DNS</li>
+                <li>Méthodologie de diagnostic, documentation et travail en autonomie</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="stage-section">
+            <article class="edu-card stage-card">
+              <h2>Procédures réseau</h2>
+              <p>
+                Cette page accueillera également les procédures détaillées de configuration des
+                équipements réseau (Firewall, Core Switch, Access Switch, serveur DHCP/DNS), avec des
+                étapes reproductibles et captures de validation.
+              </p>
+              <div class="hero-cta">
+                <a class="btn btn-secondary" href="pdf_conf/Conf_accessswitch.pdf" target="_blank" rel="noopener noreferrer">
+                  Procédure Access Switch (PDF)
+                </a>
+                <a class="btn btn-secondary" href="pdf_conf/Conf_coreswitch.pdf" target="_blank" rel="noopener noreferrer">
+                  Procédure Core Switch (PDF)
+                </a>
+                <a class="btn btn-secondary" href="pdf_conf/Conf_firewall.pdf" target="_blank" rel="noopener noreferrer">
+                  Procédure Firewall (PDF)
+                </a>
+                <a class="btn btn-secondary" href="pdf_conf/Conf_seveur_dhcp.pdf" target="_blank" rel="noopener noreferrer">
+                  Procédure Serveur DHCP (PDF)
+                </a>
+              </div>
+            </article>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <p>© 2026 - Portfolio BTS SIO SISR</p>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
