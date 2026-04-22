@@ -60,6 +60,13 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.55;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 img {
@@ -451,60 +458,35 @@ h2 {
   color: var(--link-hover);
 }
 
-.mission-card {
-  padding: 0;
-  overflow: hidden;
+.ap-missions {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.8rem 0 1.2rem;
 }
 
-.mission-summary {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.15rem;
+.ap-mission {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 0.7rem 0.85rem;
+}
+
+.ap-mission summary {
   cursor: pointer;
   font-weight: 700;
+  color: var(--primary-strong);
 }
 
-.mission-summary::-webkit-details-marker {
-  display: none;
-}
-
-.mission-card[open] .mission-summary i {
-  transform: rotate(180deg);
-}
-
-.mission-summary i {
-  transition: transform 0.2s ease;
-}
-
-.mission-intro,
-.mission-doc-list {
-  padding: 0 1.15rem 1rem;
-}
-
-.mission-card > .hero-cta {
-  padding: 0 1.15rem 1rem;
-}
-
-.mission-intro {
-  color: var(--muted);
-  margin: 0;
-}
-
-.mission-doc-list {
+.ap-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0;
   display: grid;
-  gap: 0.85rem;
+  gap: 0.55rem;
 }
 
-.mission-doc-item {
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--border);
-}
-
-.mission-doc-item h3 {
-  margin-bottom: 0.65rem;
+.ap-empty {
+  margin: 0.75rem 0 0;
 }
 
 .stage-gallery {
